@@ -35,6 +35,7 @@ public class NumberWizard : MonoBehaviour
     void CalculateGuess()
     {
         CurrentGuess = (MaximumGuess + LowestGuess +1) / 2;
+        Debug.Log("Is your number higher or lower than " + CurrentGuess);
     }
 
     // Update is called once per frame
@@ -47,22 +48,15 @@ public class NumberWizard : MonoBehaviour
             {
                 LowestGuess = CurrentGuess;
                 CalculateGuess();
-                Debug.Log("Is your number higher or lower than" + CurrentGuess);
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 MaximumGuess = CurrentGuess;
                 CalculateGuess();
-                Debug.Log("Is your number higher or lower than" + CurrentGuess);
             }
             else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
-                Debug.Log(CurrentGuess + " is the number you guessed.");
                 ResetGame();
-            }
-            else
-            {
-                Debug.Log("Please only use the up arrow, down arrow, and enter/return keys");
             }
         }
 
