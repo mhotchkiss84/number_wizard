@@ -11,12 +11,30 @@ public class NumberWizard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartGame();
+    }
+
+    void StartGame()
+    {
         Debug.Log("Welcome to Number Wizard");
         Debug.Log("Pick a number");
-        Debug.Log("The highest number you can pick is " +MaximumGuess);
-        Debug.Log("The lowest number you can pick is "+ LowestGuess);
-        Debug.Log("Tell me if your number is higher or lower than 500");
+        Debug.Log("The highest number you can pick is " + MaximumGuess);
+        Debug.Log("The lowest number you can pick is " + LowestGuess);
+        Debug.Log("Tell me if your number is higher or lower than " + CurrentGuess);
         Debug.Log("Push up = higher, push down = lower, push enter = correct");
+    }
+
+    void ResetGame()
+    {
+        MaximumGuess = 1000;
+        LowestGuess = 1;
+        CurrentGuess = 500;
+        StartGame();
+    }
+
+    void CalculateGuess()
+    {
+        CurrentGuess = (MaximumGuess + LowestGuess +1) / 2;
     }
 
     // Update is called once per frame
@@ -27,20 +45,20 @@ public class NumberWizard : MonoBehaviour
             //Detecting user input
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                Debug.Log("Up Arrow key was pressed.");
                 LowestGuess = CurrentGuess;
-                Debug.Log(CurrentGuess);
+                CalculateGuess();
+                Debug.Log("Is your number higher or lower than" + CurrentGuess);
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                Debug.Log("Down Arrow key was pressed.");
                 MaximumGuess = CurrentGuess;
-                Debug.Log(CurrentGuess);
-
+                CalculateGuess();
+                Debug.Log("Is your number higher or lower than" + CurrentGuess);
             }
             else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
-                Debug.Log("Return key was pressed.");
+                Debug.Log(CurrentGuess + " is the number you guessed.");
+                ResetGame();
             }
             else
             {
